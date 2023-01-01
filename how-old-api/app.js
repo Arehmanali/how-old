@@ -3,9 +3,8 @@ require('dotenv').config({
 });
 
 const express = require('express');
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
+// const RedisStore = require('connect-redis')(session);
 
 const initAuthMiddleware = require('./features/login/init-auth-middleware');
 const indexRouter = require('./routes/index');
@@ -23,21 +22,20 @@ if (process.env.REDIS_PASSWORD) {
   redisStoreConfig.password = process.env.REDIS_PASSWORD; // this will use the REDIS_PASSWORD if required
 }
 
-const redisStore = new RedisStore(redisStoreConfig);
+// const redisStore = new RedisStore(redisStoreConfig);
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 app.enable('trust proxy');
 
 const { COOKIE_EXPIRATION_MS } = process.env;
 app.use(
   session({
-    store: redisStore,
-    secret: 'keyboard cat',
+    // store: redisStore,
+    secret: 'how old secret for session store',
     name: process.env.SESSION_COOKIE_NAME,
     resave: false,
     saveUninitialized: true,

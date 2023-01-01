@@ -35,7 +35,7 @@ async function validateRegisterPayload(req, res, next) {
   }
 
   if (errors) {
-    return res.status(400).send({ success: false, messages: { errors }});
+    return res.status(400).send({ success: false, messages: { errors } });
   }
   return next();
 }

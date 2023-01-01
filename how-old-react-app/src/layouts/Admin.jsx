@@ -21,7 +21,6 @@ import dashboardStyle from "assets/jss/material-dashboard-react/layouts/dashboar
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
-const { REACT_APP_SERVER_URL } = process.env;
 let userInfo = {};
 
 const switchRoutes = (
@@ -80,26 +79,14 @@ class Dashboard extends React.Component {
   };
   async componentDidMount() {
     const { history } = this.props;
-
+    const sessionStorage = JSON.parse(localStorage.getItem("sessionStorage"));
     if (navigator.platform.indexOf("Win") > -1) {
       const ps = new PerfectScrollbar(this.refs.mainPanel);
     }
     window.addEventListener("resize", this.resizeFunction);
 
-    let getSessionRequest;
-    try {
-      getSessionRequest = await axios.get(
-        `http://${REACT_APP_SERVER_URL}/get-session`,
-        {
-          withCredentials: true,
-        }
-      );
-    } catch ({ response }) {
-      getSessionRequest = response;
-    }
-    const { data: getSessionRequestData } = getSessionRequest;
-    if (getSessionRequestData.success) {
-      return (userInfo = getSessionRequestData.userInfo);
+    if (sessionStorage.success) {
+      return (userInfo = sessionStorage.userInfo);
     }
     return history.push("/auth/login-page");
   }
