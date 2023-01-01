@@ -6,8 +6,6 @@ import ChartistGraph from "react-chartist";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Store from "@material-ui/icons/Store";
-import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
@@ -23,7 +21,6 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import Table from "components/Table/Table.jsx";
 import Tasks from "components/Tasks/Tasks.jsx";
 import CustomTabs from "components/CustomTabs/CustomTabs.jsx";
-import Danger from "components/Typography/Danger.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardIcon from "components/Card/CardIcon.jsx";
@@ -35,20 +32,20 @@ import { bugs, website, server } from "variables/general.jsx";
 import {
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart
+  completedTasksChart,
 } from "variables/charts.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
 class Dashboard extends React.Component {
   state = {
-    value: 0
+    value: 0,
   };
   handleChange = (event, value) => {
     this.setState({ value });
   };
 
-  handleChangeIndex = index => {
+  handleChangeIndex = (index) => {
     this.setState({ value: index });
   };
   render() {
@@ -60,33 +57,27 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="warning" stats icon>
                 <CardIcon color="warning">
-                  <Icon>content_copy</Icon>
+                  <Icon>directions_walk</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Used Space</p>
-                <h3 className={classes.cardTitle}>
-                  49/50 <small>GB</small>
-                </h3>
+                <p className={classes.cardCategory}>Visitors</p>
+                <h3 className={classes.cardTitle}>+589</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Danger>
-                    <Warning />
-                  </Danger>
-                  <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Get more space
-                  </a>
+                  <DateRange />
+                  Last 24 Hours
                 </div>
               </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
-              <CardHeader color="success" stats icon>
-                <CardIcon color="success">
-                  <Store />
+              <CardHeader color="info" stats icon>
+                <CardIcon color="info">
+                  <Icon>male</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Revenue</p>
-                <h3 className={classes.cardTitle}>$34,245</h3>
+                <p className={classes.cardCategory}>Male</p>
+                <h3 className={classes.cardTitle}>245</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -100,32 +91,32 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="danger" stats icon>
                 <CardIcon color="danger">
-                  <Icon>info_outline</Icon>
+                  <Icon>female</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Fixed Issues</p>
-                <h3 className={classes.cardTitle}>75</h3>
+                <p className={classes.cardCategory}>Female</p>
+                <h3 className={classes.cardTitle}>375</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <LocalOffer />
-                  Tracked from Github
+                  <DateRange />
+                  Last 24 Hours
                 </div>
               </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
-              <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <Accessibility />
+              <CardHeader color="success" stats icon>
+                <CardIcon color="success">
+                  <Icon>sentiment_satisfied_alt</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Followers</p>
-                <h3 className={classes.cardTitle}>+245</h3>
+                <p className={classes.cardCategory}>Feeling Happy</p>
+                <h3 className={classes.cardTitle}>95%</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Update />
-                  Just Updated
+                  <DateRange />
+                  Last 24 Hours
                 </div>
               </CardFooter>
             </Card>
@@ -224,7 +215,7 @@ class Dashboard extends React.Component {
                       tasksIndexes={[0, 1, 2, 3]}
                       tasks={bugs}
                     />
-                  )
+                  ),
                 },
                 {
                   tabName: "Website",
@@ -235,7 +226,7 @@ class Dashboard extends React.Component {
                       tasksIndexes={[0, 1]}
                       tasks={website}
                     />
-                  )
+                  ),
                 },
                 {
                   tabName: "Server",
@@ -246,8 +237,8 @@ class Dashboard extends React.Component {
                       tasksIndexes={[0, 1, 2]}
                       tasks={server}
                     />
-                  )
-                }
+                  ),
+                },
               ]}
             />
           </GridItem>
@@ -267,7 +258,7 @@ class Dashboard extends React.Component {
                     ["1", "Dakota Rice", "$36,738", "Niger"],
                     ["2", "Minerva Hooper", "$23,789", "Curaçao"],
                     ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                    ["4", "Philip Chaney", "$38,735", "Korea, South"]
+                    ["4", "Philip Chaney", "$38,735", "Korea, South"],
                   ]}
                 />
               </CardBody>
@@ -280,7 +271,7 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(dashboardStyle)(Dashboard);
