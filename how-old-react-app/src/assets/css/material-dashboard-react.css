@@ -1,18 +1,3 @@
-/*!
-
- =========================================================
- * Material Dashboard React - v1.6.0 based on Material Dashboard - v1.2.0
- =========================================================
-
- * Product Page: http://www.creative-tim.com/product/material-dashboard-react
- * Copyright 2018 Creative Tim (http://www.creative-tim.com)
- * Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-react-nodejs/blob/master/LICENSE.md)
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
- */
 .ct-grid {
   stroke: rgba(255, 255, 255, 0.2);
   stroke-width: 1px;
@@ -511,7 +496,7 @@ footer ul li a:hover {
 }
 
 .fixed-plugin .github-btn {
-  font: bold 11px/14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: bold 11px/14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   height: 20px;
   overflow: hidden;
 }
@@ -534,7 +519,13 @@ footer ul li a:hover {
 
 .fixed-plugin .gh-btn {
   background-color: #eee;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fcfcfc), color-stop(100%, #eee));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #fcfcfc),
+    color-stop(100%, #eee)
+  );
   background-image: -webkit-linear-gradient(top, #fcfcfc 0, #eee 100%);
   background-image: -moz-linear-gradient(top, #fcfcfc 0, #eee 100%);
   background-image: -ms-linear-gradient(top, #fcfcfc 0, #eee 100%);
@@ -549,7 +540,13 @@ footer ul li a:hover {
 .fixed-plugin .gh-btn:focus {
   text-decoration: none;
   background-color: #ddd;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(100%, #ddd));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #eee),
+    color-stop(100%, #ddd)
+  );
   background-image: -webkit-linear-gradient(top, #eee 0, #ddd 100%);
   background-image: -moz-linear-gradient(top, #eee 0, #ddd 100%);
   background-image: -ms-linear-gradient(top, #eee 0, #ddd 100%);
@@ -586,12 +583,12 @@ footer ul li a:hover {
 
 .fixed-plugin .gh-count:hover,
 .fixed-plugin .gh-count:focus {
-  color: #4183C4;
+  color: #4183c4;
 }
 
 .fixed-plugin .gh-count:before,
 .fixed-plugin .gh-count:after {
-  content: '';
+  content: "";
   position: absolute;
   display: inline-block;
   width: 0;

@@ -21,11 +21,11 @@ const styles = {
       margin: "0",
       fontSize: "14px",
       marginTop: "0",
-      marginBottom: "0"
+      marginBottom: "0",
     },
     "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
+      color: "#FFFFFF",
+    },
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -39,9 +39,9 @@ const styles = {
       color: "#777",
       fontSize: "65%",
       fontWeight: "400",
-      lineHeight: "1"
-    }
-  }
+      lineHeight: "1",
+    },
+  },
 };
 
 class Notifications extends React.Component {
@@ -53,7 +53,7 @@ class Notifications extends React.Component {
       tr: false,
       bl: false,
       bc: false,
-      br: false
+      br: false,
     };
   }
   // to stop the warning of calling setState of unmounted component
@@ -81,21 +81,7 @@ class Notifications extends React.Component {
       <Card>
         <CardHeader color="primary">
           <h4 className={classes.cardTitleWhite}>Notifications</h4>
-          <p className={classes.cardCategoryWhite}>
-            Handcrafted by our friends from{" "}
-            <a target="_blank" href="https://material-ui-next.com/">
-              Material UI
-            </a>{" "}
-            and styled by{" "}
-            <a target="_blank" href="https://www.creative-tim.com/">
-              Creative Tim
-            </a>
-            . Please checkout the{" "}
-            <a href="#pablo" target="_blank">
-              full documentation
-            </a>
-            .
-          </p>
+          <p className={classes.cardCategoryWhite} />
         </CardHeader>
         <CardBody>
           <GridContainer>

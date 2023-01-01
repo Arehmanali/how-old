@@ -1,20 +1,10 @@
 import React, { Component } from "react";
 import classnames from "classnames";
-import { NavLink } from "react-router-dom";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  FacebookIcon,
-  TwitterIcon
-} from "react-share";
-import GitHubButton from "react-github-button";
 
 import imagine1 from "assets/img/sidebar-1.jpg";
 import imagine2 from "assets/img/sidebar-2.jpg";
 import imagine3 from "assets/img/sidebar-3.jpg";
 import imagine4 from "assets/img/sidebar-4.jpg";
-
-import Button from "components/CustomButtons/Button.jsx";
 
 class FixedPlugin extends Component {
   constructor(props) {
@@ -22,7 +12,7 @@ class FixedPlugin extends Component {
     this.state = {
       classes: "dropdown show",
       bg_checked: true,
-      bgImage: this.props.bgImage
+      bgImage: this.props.bgImage,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -33,7 +23,7 @@ class FixedPlugin extends Component {
     return (
       <div
         className={classnames("fixed-plugin", {
-          "rtl-fixed-plugin": this.props.rtlActive
+          "rtl-fixed-plugin": this.props.rtlActive,
         })}
       >
         <div id="fixedPluginClasses" className={this.props.fixedClasses}>
@@ -147,69 +137,6 @@ class FixedPlugin extends Component {
               >
                 <img src={imagine4} alt="..." />
               </a>
-            </li>
-
-            <li className="button-container">
-              <div className="button-container">
-                <Button
-                  color="success"
-                  href="https://www.creative-tim.com/product/material-dashboard-react-nodejs"
-                  target="_blank"
-                  fullWidth
-                >
-                  Download free!
-                </Button>
-              </div>
-            </li>
-            <li className="button-container">
-              <div className="button-container">
-                <Button
-                  color="warning"
-                  disabled
-                  // href="https://www.creative-tim.com/product/material-dashboard-pro-react"
-                  target="_blank"
-                  fullWidth
-                >
-                  Get PRO version
-                </Button>
-              </div>
-            </li>
-            <li className="button-container">
-              <NavLink to={"../documentation"} activeClassName="active">
-                <Button color="info" fullWidth>
-                  Documentation
-                </Button>
-              </NavLink>
-            </li>
-
-            <li className="header-title" id="sharrreTitle">
-              Thank you for sharing!
-            </li>
-
-            <li className="button-container">
-              <FacebookShareButton url="https://creativetimofficial.github.io/material-dashboard-react">
-                <FacebookIcon size={32} round={true} />
-              </FacebookShareButton>
-              <TwitterShareButton
-                url="https://creativetimofficial.github.io/material-dashboard-react"
-                title="Material Dashboard React - Free Bootstrap Admin Template"
-                hashtags={["react", "material-ui"]}
-                via="creativetim"
-              >
-                <TwitterIcon size={32} round={true} />
-              </TwitterShareButton>
-            </li>
-            <li className="button-container">
-              <GitHubButton
-                type="stargazers"
-                namespace="creativetimofficial"
-                repo="material-dashboard-react-nodejs"
-              />
-              <GitHubButton
-                type="forks"
-                namespace="creativetimofficial"
-                repo="material-dashboard-react-nodejs"
-              />
             </li>
           </ul>
         </div>

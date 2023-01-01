@@ -38,15 +38,10 @@ function Footer({ ...props }) {
         </div>
         <p className={classes.right}>
           <span>
-            &copy; {1900 + new Date().getYear()} , made with love, by{" "}
-            <a href="https://www.creative-tim.com" className={classes.a}>
-              Creative Tim
+            &copy; {1900 + new Date().getYear()}{" "}
+            <a href="" className={classes.a}>
+              How Old. All rights reserved.
             </a>{" "}
-            and{" "}
-            <a href="https://udevoffice.com/" className={classes.a}>
-              Udevoffice
-            </a>{" "}
-            for a better web
           </span>
         </p>
       </div>
@@ -55,7 +50,7 @@ function Footer({ ...props }) {
 }
 
 Footer.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(footerStyle)(Footer);
