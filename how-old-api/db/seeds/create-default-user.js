@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 exports.seed = async function seed(knex) {
-  const hashedPass = await bcrypt.hash('secret', 5);
+  const hashedPass = await bcrypt.hash('admin1234', 5);
   await knex('users').insert({
     name: 'admin admin',
     email: 'admin@howold.com',

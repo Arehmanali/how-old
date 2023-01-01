@@ -65,6 +65,7 @@ class LoginPage extends React.Component {
     }
     const { data: loginRequestData } = loginRequest;
     if (loginRequestData.success) {
+      localStorage.setItem("sessionStorage", JSON.stringify(loginRequestData));
       return history.push("/dashboard");
     }
 
