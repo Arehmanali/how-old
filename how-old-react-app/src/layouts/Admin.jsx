@@ -85,8 +85,10 @@ class Dashboard extends React.Component {
     }
     window.addEventListener("resize", this.resizeFunction);
 
-    if (sessionStorage.success) {
-      return (userInfo = sessionStorage.userInfo);
+    if (sessionStorage) {
+      if (sessionStorage.success) {
+        return (userInfo = sessionStorage.userInfo);
+      }
     }
     return history.push("/auth/login-page");
   }
