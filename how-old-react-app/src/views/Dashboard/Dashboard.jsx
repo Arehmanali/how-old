@@ -132,12 +132,12 @@ class Dashboard extends React.Component {
                 />
               </CardHeader>
               <CardBody>
-                <h4 className={classes.cardTitle}>Daily Sales</h4>
+                <h4 className={classes.cardTitle}>Daily Visitors</h4>
                 <p className={classes.cardCategory}>
                   <span className={classes.successText}>
                     <ArrowUpward className={classes.upArrowCardCategory} /> 55%
                   </span>{" "}
-                  increase in today sales.
+                  increase in today visitings.
                 </p>
               </CardBody>
               <CardFooter chart>
@@ -160,14 +160,12 @@ class Dashboard extends React.Component {
                 />
               </CardHeader>
               <CardBody>
-                <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-                <p className={classes.cardCategory}>
-                  Last Campaign Performance
-                </p>
+                <h4 className={classes.cardTitle}>Feelings</h4>
+                <p className={classes.cardCategory}>Feelings of the visitors</p>
               </CardBody>
               <CardFooter chart>
                 <div className={classes.stats}>
-                  <AccessTime /> campaign sent 2 days ago
+                  <AccessTime /> Last 24 hours
                 </div>
               </CardFooter>
             </Card>
@@ -184,14 +182,12 @@ class Dashboard extends React.Component {
                 />
               </CardHeader>
               <CardBody>
-                <h4 className={classes.cardTitle}>Completed Tasks</h4>
-                <p className={classes.cardCategory}>
-                  Last Campaign Performance
-                </p>
+                <h4 className={classes.cardTitle}>Gender of Visitors</h4>
+                <p className={classes.cardCategory}>Visitors gender ratio</p>
               </CardBody>
               <CardFooter chart>
                 <div className={classes.stats}>
-                  <AccessTime /> campaign sent 2 days ago
+                  <AccessTime /> Last 24 hours
                 </div>
               </CardFooter>
             </Card>
@@ -199,63 +195,25 @@ class Dashboard extends React.Component {
         </GridContainer>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <CustomTabs
-              title="Tasks:"
-              headerColor="primary"
-              tabs={[
-                {
-                  tabName: "Bugs",
-                  tabIcon: BugReport,
-                  tabContent: (
-                    <Tasks
-                      checkedIndexes={[0, 3]}
-                      tasksIndexes={[0, 1, 2, 3]}
-                      tasks={bugs}
-                    />
-                  ),
-                },
-                {
-                  tabName: "Website",
-                  tabIcon: Code,
-                  tabContent: (
-                    <Tasks
-                      checkedIndexes={[0]}
-                      tasksIndexes={[0, 1]}
-                      tasks={website}
-                    />
-                  ),
-                },
-                {
-                  tabName: "Server",
-                  tabIcon: Cloud,
-                  tabContent: (
-                    <Tasks
-                      checkedIndexes={[1]}
-                      tasksIndexes={[0, 1, 2]}
-                      tasks={server}
-                    />
-                  ),
-                },
-              ]}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
             <Card>
               <CardHeader color="warning">
-                <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+                <h4 className={classes.cardTitleWhite}>Customers Stats</h4>
                 <p className={classes.cardCategoryWhite}>
                   New employees on 15th September, 2016
                 </p>
               </CardHeader>
               <CardBody>
                 <Table
-                  tableHeaderColor="warning"
-                  tableHead={["ID", "Name", "Salary", "Country"]}
+                  icon="people_outline"
+                  tableHeaderColor="primary"
+                  tableHead={["ID", "Gender", "Age", "Feelings"]}
                   tableData={[
-                    ["1", "Dakota Rice", "$36,738", "Niger"],
-                    ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                    ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                    ["4", "Philip Chaney", "$38,735", "Korea, South"],
+                    ["1", "Male", "34", "Happy"],
+                    ["2", "Female", "41", "Happy"],
+                    ["3", "Male", "32", "Sad"],
+                    ["4", "Male", "55", "Sad"],
+                    ["5", "Female", "20", "Happy"],
+                    ["6", "Male", "31", "Happy"],
                   ]}
                 />
               </CardBody>

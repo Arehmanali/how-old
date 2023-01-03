@@ -7,6 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import TablePagination from "@material-ui/core/TablePagination";
 // core components
 import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";
 
@@ -46,13 +47,14 @@ function CustomTable({ ...props }) {
             );
           })}
         </TableBody>
+        <TablePagination rowsPerPageOptions={[10, 50]} />
       </Table>
     </div>
   );
 }
 
 CustomTable.defaultProps = {
-  tableHeaderColor: "gray"
+  tableHeaderColor: "gray",
 };
 
 CustomTable.propTypes = {
@@ -64,10 +66,10 @@ CustomTable.propTypes = {
     "success",
     "info",
     "rose",
-    "gray"
+    "gray",
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
 export default withStyles(tableStyle)(CustomTable);
