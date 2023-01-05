@@ -30,14 +30,17 @@ class HeaderLinks extends React.Component {
     profilePopupOpen: false,
   };
   handleToggle = () => {
-    this.setState(state => ({ open: !state.open, profilePopupOpen: false }));
+    this.setState((state) => ({ open: !state.open, profilePopupOpen: false }));
   };
 
   handleToggleProfile = () => {
-    this.setState(state => ({ profilePopupOpen: !state.profilePopupOpen, open: false }));
+    this.setState((state) => ({
+      profilePopupOpen: !state.profilePopupOpen,
+      open: false,
+    }));
   };
 
-  handleClose = event => {
+  handleClose = (event) => {
     if (this.anchorEl.contains(event.target)) {
       return;
     }
@@ -50,18 +53,19 @@ class HeaderLinks extends React.Component {
     let logoutRequest;
     try {
       logoutRequest = await axios.post(
-        `http://${REACT_APP_SERVER_URL}/logout`, {}, {
-          withCredentials: true
+        `http://${REACT_APP_SERVER_URL}/logout`,
+        {},
+        {
+          withCredentials: true,
         }
       );
     } catch ({ request }) {
-      
       logoutRequest = request;
     }
     if (logoutRequest.status === 301) {
-      history.push('/auth/login-page');
+      history.push("/auth/login-page");
     }
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -71,34 +75,23 @@ class HeaderLinks extends React.Component {
         <div className={classes.searchWrapper}>
           <CustomInput
             formControlProps={{
-              className: classes.margin + " " + classes.search
+              className: classes.margin + " " + classes.search,
             }}
             inputProps={{
               placeholder: "Search",
               inputProps: {
-                "aria-label": "Search"
-              }
+                "aria-label": "Search",
+              },
             }}
           />
           <Button color="white" aria-label="edit" justIcon round>
             <Search />
           </Button>
         </div>
-        <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
-          aria-label="Dashboard"
-          className={classes.buttonLink}
-        >
-          <Dashboard className={classes.icons} />
-          <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Dashboard</p>
-          </Hidden>
-        </Button>
+
         <div className={classes.manager}>
           <Button
-            buttonRef={node => {
+            buttonRef={(node) => {
               this.anchorEl = node;
             }}
             color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -134,7 +127,7 @@ class HeaderLinks extends React.Component {
                 id="menu-list-grow"
                 style={{
                   transformOrigin:
-                    placement === "bottom" ? "center top" : "center bottom"
+                    placement === "bottom" ? "center top" : "center bottom",
                 }}
               >
                 <Paper>
@@ -210,7 +203,7 @@ class HeaderLinks extends React.Component {
                 id="menu-list-grow"
                 style={{
                   transformOrigin:
-                    placement === "bottom" ? "center top" : "center bottom"
+                    placement === "bottom" ? "center top" : "center bottom",
                 }}
               >
                 <Paper>
@@ -230,24 +223,14 @@ class HeaderLinks extends React.Component {
                       >
                         Settings
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
-                        Activity
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
-                        Support
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.logout}
-                        className={classes.dropdownItem}
-                      >
-                        Logout
-                      </MenuItem>
+                      <NavLink to="/auth/login-page">
+                        <MenuItem
+                          onClick={this.logout}
+                          className={classes.dropdownItem}
+                        >
+                          Logout
+                        </MenuItem>
+                      </NavLink>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
