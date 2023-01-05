@@ -194,12 +194,12 @@ class Dashboard extends React.Component {
           </GridItem>
         </GridContainer>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={8}>
             <Card>
-              <CardHeader color="warning">
+              <CardHeader color="primary">
                 <h4 className={classes.cardTitleWhite}>Customers Stats</h4>
                 <p className={classes.cardCategoryWhite}>
-                  New employees on 15th September, 2016
+                  New employees today visited
                 </p>
               </CardHeader>
               <CardBody>
