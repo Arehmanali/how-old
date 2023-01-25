@@ -27,16 +27,15 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import registerPageStyle from "assets/jss/material-dashboard-react/views/registerPageStyle.jsx";
 
 const { REACT_APP_SERVER_URL } = process.env;
-
 class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       checked: [],
-      errors: {}
+      errors: {},
     };
   }
-  register = async e => {
+  register = async (e) => {
     e.preventDefault();
 
     const { history } = this.props;
@@ -45,8 +44,8 @@ class RegisterPage extends React.Component {
     const formElements = e.target.elements;
 
     const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value
+      .map((field) => ({
+        [field]: formElements.namedItem(field).value,
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
@@ -55,7 +54,7 @@ class RegisterPage extends React.Component {
       registerRequest = await axios.post(
         `http://${REACT_APP_SERVER_URL}/register`,
         {
-          ...formValues
+          ...formValues,
         }
       );
     } catch ({ response }) {
@@ -68,10 +67,10 @@ class RegisterPage extends React.Component {
 
     this.setState({
       errors:
-        registerRequestData.messages && registerRequestData.messages.errors
+        registerRequestData.messages && registerRequestData.messages.errors,
     });
   };
-  handleToggle = value => {
+  handleToggle = (value) => {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -83,7 +82,7 @@ class RegisterPage extends React.Component {
     }
 
     this.setState({
-      checked: newChecked
+      checked: newChecked,
     });
   };
   render() {
@@ -104,7 +103,7 @@ class RegisterPage extends React.Component {
                     {[
                       "fa fa-facebook-square",
                       "fa fa-twitter",
-                      "fa fa-google-plus"
+                      "fa fa-google-plus",
                     ].map((prop, key) => {
                       return (
                         <Button
@@ -126,7 +125,7 @@ class RegisterPage extends React.Component {
                     id="name"
                     formControlProps={{
                       fullWidth: true,
-                      className: classes.formControlClassName
+                      className: classes.formControlClassName,
                     }}
                     inputProps={{
                       required: true,
@@ -135,7 +134,7 @@ class RegisterPage extends React.Component {
                         <InputAdornment position="end">
                           <Face className={classes.inputAdornmentIcon} />
                         </InputAdornment>
-                      )
+                      ),
                     }}
                   />
                   <CustomInput
@@ -143,7 +142,7 @@ class RegisterPage extends React.Component {
                     id="email"
                     formControlProps={{
                       fullWidth: true,
-                      className: classes.formControlClassName
+                      className: classes.formControlClassName,
                     }}
                     error={errors.username}
                     inputProps={{
@@ -154,7 +153,7 @@ class RegisterPage extends React.Component {
                         <InputAdornment position="end">
                           <Email className={classes.inputAdornmentIcon} />
                         </InputAdornment>
-                      )
+                      ),
                     }}
                   />
                   <CustomInput
@@ -162,7 +161,7 @@ class RegisterPage extends React.Component {
                     id="password"
                     formControlProps={{
                       fullWidth: true,
-                      className: classes.formControlClassName
+                      className: classes.formControlClassName,
                     }}
                     error={errors.password}
                     inputProps={{
@@ -175,7 +174,7 @@ class RegisterPage extends React.Component {
                             lock_outline
                           </Icon>
                         </InputAdornment>
-                      )
+                      ),
                     }}
                   />
                   <FormControlLabel
@@ -184,7 +183,7 @@ class RegisterPage extends React.Component {
                         classes.checkboxLabelControl +
                         " " +
                         classes.checkboxLabelControlClassName,
-                      label: classes.checkboxLabel
+                      label: classes.checkboxLabel,
                     }}
                     control={
                       <Checkbox
@@ -195,7 +194,7 @@ class RegisterPage extends React.Component {
                         required
                         classes={{
                           checked: classes.checked,
-                          root: classes.checkRoot
+                          root: classes.checkRoot,
                         }}
                       />
                     }
@@ -222,7 +221,7 @@ class RegisterPage extends React.Component {
 
 RegisterPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default withStyles(registerPageStyle)(RegisterPage);

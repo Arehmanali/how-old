@@ -133,7 +133,7 @@ class LoginPage extends React.Component {
                     className={`${classes.textCenter} ${classes.checkboxLabel}`}
                   >
                     Or Sign in with <strong>admin@howold.com</strong> and the
-                    password <strong>secret</strong>{" "}
+                    password <strong>admin@howold</strong>{" "}
                   </p>
                   <CustomInput
                     labelText="Email..."
