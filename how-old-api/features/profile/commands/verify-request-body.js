@@ -16,7 +16,6 @@ async function validateRegisterPayload(req, res, next) {
   } catch (validateRegisterError) {
     payloadValidation = validateRegisterError;
   }
-
   const { details } = payloadValidation;
   let errors;
   if (details) {

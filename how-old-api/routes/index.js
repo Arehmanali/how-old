@@ -24,7 +24,7 @@ router.get('/get-session', (req, res) => {
 });
 
 router.use('/login', loginRoutes);
-router.use('/profile', isAuthenticated, profileRoutes);
+router.use('/profile', profileRoutes);
 router.use('/logout', isAuthenticated, logoutRoutes);
 router.use('/register', registerRoutes);
 

@@ -10,8 +10,8 @@ require('dotenv').config({
 
 const debug = require('debug')('express:www');
 const http = require('http');
+const logger = require('pino');
 const app = require('../app');
-const logger = require('../logger');
 
 const { HTTP_HOST, PORT } = process.env;
 
@@ -84,7 +84,7 @@ function onListening() {
   debug(`Listening on ${bind}`);
 }
 
-process.on('uncaughtException', uncaughtException => {
+process.on('uncaughtException', (uncaughtException) => {
   logger.error(
     'Uncaught Exception at: %s - message: %s',
     uncaughtException.stack,
@@ -92,7 +92,7 @@ process.on('uncaughtException', uncaughtException => {
   );
 });
 
-process.on('unhandledRejection', reason => {
+process.on('unhandledRejection', (reason) => {
   logger.error('Unhandled Rejection at: %s - message: %s', reason.stack, reason.message);
 });
 
