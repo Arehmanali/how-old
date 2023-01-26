@@ -6,10 +6,7 @@ const knexConfig = require('../../db/knexfile');
 const knex = Knex(knexConfig[process.env.NODE_ENV]);
 
 async function getUserForLoginData(email, password) {
-  const [user] = await knex('users')
-    .select()
-    .where({ email })
-    .limit(1);
+  const [user] = await knex('users').select().where({ email }).limit(1);
 
   if (!user) {
     return null;
