@@ -13,6 +13,17 @@ import tableStyle from "assets/jss/material-dashboard-react/components/tableStyl
 
 function CustomTable({ ...props }) {
   const { classes, tableHead, tableData, tableHeaderColor } = props;
+
+  const dateFromISO = (s) => {
+    var b = s.split(/\D+/);
+    return `${b[2]}-${b[1]}-${b[0]}`;
+  };
+
+  const timeFromISO = (s) => {
+    var b = s.split(/\D+/);
+    return `${b[3]}:${b[4]}:${b[5]}`;
+  };
+
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
@@ -36,13 +47,24 @@ function CustomTable({ ...props }) {
           {tableData.map((prop, key) => {
             return (
               <TableRow key={key}>
-                {prop.map((prop, key) => {
-                  return (
-                    <TableCell className={classes.tableCell} key={key}>
-                      {prop}
-                    </TableCell>
-                  );
-                })}
+                <TableCell className={classes.tableCell} key={key}>
+                  {prop.id}
+                </TableCell>
+                <TableCell className={classes.tableCell} key={key}>
+                  {prop.gender}
+                </TableCell>
+                <TableCell className={classes.tableCell} key={key}>
+                  {prop.age}
+                </TableCell>
+                <TableCell className={classes.tableCell} key={key}>
+                  {prop.feeling}
+                </TableCell>
+                <TableCell className={classes.tableCell} key={key}>
+                  {dateFromISO(prop.created_at)}
+                </TableCell>
+                <TableCell className={classes.tableCell} key={key}>
+                  {timeFromISO(prop.created_at)}
+                </TableCell>
               </TableRow>
             );
           })}

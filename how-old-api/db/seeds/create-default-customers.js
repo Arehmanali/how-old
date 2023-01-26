@@ -2,8 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+// eslint-disable-next-line func-names
 exports.seed = async function (knex) {
-  // Deletes ALL existing entries
   await knex('customers').insert([
     { gender: 'male', age: 32, feeling: 'happy', created_at: new Date() },
     { gender: 'male', age: 42, feeling: 'happy', created_at: new Date() },

@@ -2,6 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+// eslint-disable-next-line func-names
 exports.up = async function (knex) {
   await knex.schema.createTable('customers', (table) => {
     table.increments('id').unsigned().notNullable().primary(['customer_job_pkey']);
@@ -16,6 +17,7 @@ exports.up = async function (knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+// eslint-disable-next-line func-names
 exports.down = async function (knex) {
   await knex.schema.dropTable('customers');
 };
