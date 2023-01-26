@@ -3,12 +3,9 @@ const { UPDATE_INFO_SUCCESS_MESSAGE, UPDATE_INFO_ERROR_MESSAGE } = require('../c
 
 async function updateUser(req, res) {
   let user = {};
-  const {
-    user: { id },
-  } = req;
   const profileSuccessMessage = UPDATE_INFO_SUCCESS_MESSAGE;
   try {
-    user = await updateUserInfo({ ...req.body, id });
+    user = await updateUserInfo({ ...req.body });
   } catch (error) {
     user = error;
   }

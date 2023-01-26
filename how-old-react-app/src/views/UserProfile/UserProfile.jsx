@@ -57,8 +57,6 @@ class UserProfile extends React.Component {
     this.getProfile();
   }
 
-  async componentDidUpdate() {}
-
   async getProfile() {
     const { userInfo } = JSON.parse(localStorage.getItem("sessionStorage"));
     const id = userInfo.id;
@@ -78,7 +76,9 @@ class UserProfile extends React.Component {
     } catch ({ response }) {
       registerRequest = response;
     }
+    debugger;
     const { data: registerRequestData } = registerRequest;
+    debugger;
     if (registerRequestData.success) {
       this.setState({
         userName: registerRequestData.userInfo.name,

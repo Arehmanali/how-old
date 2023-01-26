@@ -5,11 +5,8 @@ const constants = require('../constants');
 const { NAME_MIN, NAME_MAX } = constants;
 
 const schema = Joi.object().keys({
-  name: Joi.string()
-    .min(NAME_MIN)
-    .max(NAME_MAX)
-    .required(),
-  username: Joi.string().email({ minDomainAtoms: 2 }),
+  name: Joi.string().min(NAME_MIN).max(NAME_MAX).required(),
+  username: Joi.string().email({ minDomainSegments: 2 }),
 });
 
 async function validateRegisterPayload(req, res, next) {
@@ -19,11 +16,12 @@ async function validateRegisterPayload(req, res, next) {
   } catch (validateRegisterError) {
     payloadValidation = validateRegisterError;
   }
+
   const { details } = payloadValidation;
   let errors;
   if (details) {
     errors = {};
-    details.forEach(errorDetail => {
+    details.forEach((errorDetail) => {
       const {
         message,
         path: [key],

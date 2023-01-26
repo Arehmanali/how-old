@@ -6,9 +6,7 @@ const { PASSWORD_MAX, PASSWORD_MIN } = constants;
 
 const schema = Joi.object().keys({
   username: Joi.string().email({ minDomainAtoms: 2 }),
-  password: Joi.string()
-    .min(PASSWORD_MIN)
-    .max(PASSWORD_MAX),
+  password: Joi.string().min(PASSWORD_MIN).max(PASSWORD_MAX),
 });
 
 module.exports = async function validate(req, res, next) {
@@ -23,7 +21,7 @@ module.exports = async function validate(req, res, next) {
 
   if (details) {
     errors = {};
-    details.forEach(errorDetail => {
+    details.forEach((errorDetail) => {
       const {
         path: [key],
         type,

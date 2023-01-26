@@ -11,7 +11,6 @@ async function getUserInfo(req, res) {
   }
 
   if (user.email) {
-    req.session.messages = { success: true };
     req.session.userInfo = { ...user };
     return res.send({
       success: true,
@@ -21,7 +20,6 @@ async function getUserInfo(req, res) {
 
   return res.send({
     success: false,
-    messages: { errors: { databaseError } },
   });
 }
 

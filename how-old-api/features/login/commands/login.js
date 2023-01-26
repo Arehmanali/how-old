@@ -15,7 +15,7 @@ function login(req, res, next) {
       });
     }
 
-    return req.logIn(user, loginError => {
+    return req.logIn(user, (loginError) => {
       if (loginError) {
         return res.status(500).send({
           success: false,

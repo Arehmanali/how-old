@@ -1,15 +1,16 @@
-const knex = require('../../db');
+const Knex = require('knex');
+const knexConfig = require('../../db/knexfile');
+
+const knex = Knex(knexConfig[process.env.NODE_ENV]);
 
 async function getUser(id) {
-  const [user] = await knex('users')
-    .where('id', id)
-    .select('email', 'name');
+  const [user] = await knex('users').where('id', id).select('email', 'name');
   return user;
 }
 
-async function updateUserInfo({ name, username: email, id }) {
+async function updateUserInfo({ name, username: email }) {
   const [user] = await knex('users')
-    .where({ id })
+    .where({ email })
     .update({
       name,
       email,
