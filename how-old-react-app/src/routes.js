@@ -31,7 +31,7 @@ const dashboardRoutes = [
     sidebar: true,
   },
   {
-    path: "/table",
+    path: "/customers",
     name: "Customers",
     icon: "people_outline",
     component: Customers,

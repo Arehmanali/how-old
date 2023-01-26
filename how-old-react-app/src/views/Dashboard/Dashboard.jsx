@@ -34,12 +34,13 @@ function Dashboard(props) {
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
   const [feelings, setFeelings] = useState(0);
+  const [dailyVisitorLabels, setDailVisitorLabels] = useState([]);
 
   const { classes } = props;
   const { REACT_APP_SERVER_URL } = process.env;
 
-  useEffect(async () => {
-    await getCustomers();
+  useEffect(() => {
+    getCustomers();
   }, []);
 
   useEffect(() => {
@@ -175,10 +176,25 @@ function Dashboard(props) {
             <CardHeader color="success">
               <ChartistGraph
                 className="ct-chart"
-                data={dailySalesChart.data}
+                data={
+                  dailySalesChart(
+                    ["M", "T", "W", "T", "F", "S", "S"],
+                    [12, 17, 7, 17, 23, 18, 38]
+                  ).data
+                }
                 type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
+                options={
+                  dailySalesChart(
+                    ["M", "T", "W", "T", "F", "S", "S"],
+                    [12, 17, 7, 17, 23, 18, 38]
+                  ).options
+                }
+                listener={
+                  dailySalesChart(
+                    ["M", "T", "W", "T", "F", "S", "S"],
+                    [12, 17, 7, 17, 23, 18, 38]
+                  ).animation
+                }
               />
             </CardHeader>
             <CardBody>
@@ -202,11 +218,31 @@ function Dashboard(props) {
             <CardHeader color="warning">
               <ChartistGraph
                 className="ct-chart"
-                data={emailsSubscriptionChart.data}
+                data={
+                  emailsSubscriptionChart(
+                    ["M", "T", "W", "T", "F", "S", "S"],
+                    [12, 17, 7, 17, 23, 18, 38]
+                  ).data
+                }
                 type="Bar"
-                options={emailsSubscriptionChart.options}
-                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-                listener={emailsSubscriptionChart.animation}
+                options={
+                  emailsSubscriptionChart(
+                    ["M", "T", "W", "T", "F", "S", "S"],
+                    [12, 17, 7, 17, 23, 18, 38]
+                  ).options
+                }
+                responsiveOptions={
+                  emailsSubscriptionChart(
+                    ["M", "T", "W", "T", "F", "S", "S"],
+                    [12, 17, 7, 17, 23, 18, 38]
+                  ).responsiveOptions
+                }
+                listener={
+                  emailsSubscriptionChart(
+                    ["M", "T", "W", "T", "F", "S", "S"],
+                    [12, 17, 7, 17, 23, 18, 38]
+                  ).animation
+                }
               />
             </CardHeader>
             <CardBody>
@@ -222,13 +258,13 @@ function Dashboard(props) {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
-            <CardHeader color="danger">
+            <CardHeader color="info">
               <ChartistGraph
                 className="ct-chart"
-                data={completedTasksChart.data}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
+                data={
+                  completedTasksChart(["Male 30%", "Female 70%"], [30, 70]).data
+                }
+                type="Pie"
               />
             </CardHeader>
             <CardBody>
@@ -265,6 +301,7 @@ function Dashboard(props) {
                   "Visit Time",
                 ]}
                 tableData={customers}
+                rowsPerPage={10}
               />
             </CardBody>
           </Card>

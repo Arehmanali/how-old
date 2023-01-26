@@ -12,7 +12,14 @@ import TablePagination from "@material-ui/core/TablePagination";
 import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";
 
 function CustomTable({ ...props }) {
-  const { classes, tableHead, tableData, tableHeaderColor } = props;
+  const {
+    classes,
+    tableHead,
+    tableData,
+    tableHeaderColor,
+    rowsPerPage,
+  } = props;
+  const page = tableData && Math.ceil(tableData.length / 10);
 
   const dateFromISO = (s) => {
     var b = s.split(/\D+/);
@@ -44,7 +51,7 @@ function CustomTable({ ...props }) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+          {tableData.slice(0, rowsPerPage).map((prop, key) => {
             return (
               <TableRow key={key}>
                 <TableCell className={classes.tableCell} key={key}>
@@ -69,7 +76,20 @@ function CustomTable({ ...props }) {
             );
           })}
         </TableBody>
-        <TablePagination rowsPerPageOptions={[10, 50]} />
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          count={tableData.length}
+          rowsPerPage={rowsPerPage}
+          page={0}
+          backIconButtonProps={{
+            "aria-label": "Previous Page",
+          }}
+          nextIconButtonProps={{
+            "aria-label": "Next Page",
+          }}
+          onChangePage={{}}
+          onChangeRowsPerPage={{}}
+        />
       </Table>
     </div>
   );

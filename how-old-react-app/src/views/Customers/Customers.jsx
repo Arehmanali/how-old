@@ -68,6 +68,7 @@ function Customers(props) {
                 "Visit Time",
               ]}
               tableData={customers}
+              rowsPerPage={10}
             />
           </CardBody>
         </Card>
@@ -81,7 +82,7 @@ const styles = {
     "&,& a,& a:hover,& a:focus": {
       color: "rgba(255,255,255,.62)",
       margin: "0",
-      fontSize: "6px",
+      fontSize: "14px",
       marginTop: "0",
       marginBottom: "0",
     },
@@ -93,14 +94,14 @@ const styles = {
     color: "#FFFFFF",
     marginTop: "0px",
     minHeight: "auto",
-    fontWeight: "100",
+    fontWeight: "300",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: "0px",
     textDecoration: "none",
     "& small": {
       color: "#777",
-      fontSize: "15%",
-      fontWeight: "100",
+      fontSize: "65%",
+      fontWeight: "400",
       lineHeight: "0.5",
     },
   },
