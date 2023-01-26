@@ -43,12 +43,6 @@ function Customers(props) {
     if (registerRequestData.success) {
       setCustomers(registerRequestData.customers);
     }
-    if (!registerRequestData.success) {
-      // this.setState({
-      //   errors:
-      //     registerRequestData.messages && registerRequestData.messages.errors,
-      // });
-    }
   };
 
   return (
