@@ -86,11 +86,10 @@ function Dashboard(props) {
     let visitCount = [];
     let happyCount = [];
     let labels = [];
-    for (let i = 7; i > 0; i--) {
+    for (let i = 6; i >= 0; i--) {
       const date = `${today.getFullYear()}-${String(
         today.getMonth() + 1
       ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0") - i}`;
-      debugger;
       let daydata = prevWeekCustomers.filter(
         (e) => e.created_at.slice(0, 10) === date
       );
@@ -143,9 +142,13 @@ function Dashboard(props) {
     let date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
       2,
       "0"
-    )}-${String(today.getDate()).padStart(2, "0") - 7}`;
-    const toTime = new Date().toISOString();
-    const fromTime = new Date(date).toISOString();
+    )}-${String(today.getDate()).padStart(2, "0")}`;
+    let fromTime = new Date(date);
+    fromTime.setDate(today.getDate() - 7);
+    fromTime = fromTime.toISOString();
+    let toTime = new Date(date);
+    toTime.setDate(today.getDate());
+    toTime = toTime.toISOString();
     let registerRequest;
     try {
       registerRequest = await axios.get(
@@ -175,9 +178,10 @@ function Dashboard(props) {
       2,
       "0"
     )}-${String(today.getDate()).padStart(2, "0")}`;
-    const toTime = new Date().toISOString();
     const fromTime = new Date(date).toISOString();
-
+    let toTime = new Date(date);
+    toTime.setDate(today.getDate());
+    toTime = toTime.toISOString();
     let registerRequest;
     try {
       registerRequest = await axios.get(
