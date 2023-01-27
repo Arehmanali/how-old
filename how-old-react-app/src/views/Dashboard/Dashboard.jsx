@@ -31,16 +31,39 @@ import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardS
 function Dashboard(props) {
   const [value, setValue] = useState(0);
   const [customers, setCustomers] = useState([]);
+  const [prevWeekCustomers, setPrevWeekCustomers] = useState([]);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
   const [feelings, setFeelings] = useState(0);
-  const [dailyVisitorLabels, setDailVisitorLabels] = useState([]);
+  const [visitorLabels, setVisitorLabels] = useState([
+    "M",
+    "T",
+    "W",
+    "T",
+    "F",
+    "S",
+    "S",
+  ]);
+  const [feelingLabels, setFeelingLabels] = useState([
+    "M",
+    "T",
+    "W",
+    "T",
+    "F",
+    "S",
+    "S",
+  ]);
+  const [visitorCount, setVisitorCount] = useState([]);
+  const [feelingCount, setFeelingCount] = useState([]);
+  const [chartMaleCount, setChartMaleCount] = useState(0);
+  const [chartFemaleCount, setChartFemaleCount] = useState(0);
 
   const { classes } = props;
   const { REACT_APP_SERVER_URL } = process.env;
 
   useEffect(() => {
     getCustomers();
+    getPrevWeekCustomers();
   }, []);
 
   useEffect(() => {
@@ -50,6 +73,55 @@ function Dashboard(props) {
       getFeelings();
     }
   }, [customers]);
+
+  useEffect(() => {
+    if (prevWeekCustomers && prevWeekCustomers.length > 0) {
+      calculateChartData();
+    }
+  }, [prevWeekCustomers]);
+
+  const calculateChartData = async () => {
+    let today = new Date();
+
+    let visitCount = [];
+    let happyCount = [];
+    let labels = [];
+    for (let i = 7; i > 0; i--) {
+      const date = `${today.getFullYear()}-${String(
+        today.getMonth() + 1
+      ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0") - i}`;
+      debugger;
+      let daydata = prevWeekCustomers.filter(
+        (e) => e.created_at.slice(0, 10) === date
+      );
+
+      visitCount.push(daydata.length);
+      labels.push(new Date(date).getDay());
+      const happy = daydata.filter((e) => e.feeling === "happy");
+      const happyPercentage = (happy.length / daydata.length) * 100;
+      happyCount.push(Math.floor(happyPercentage));
+    }
+
+    const male = prevWeekCustomers.filter((e) => e.gender === "male");
+    const female = prevWeekCustomers.filter((e) => e.gender === "female");
+    const newLabel = [
+      visitorLabels[labels[0]],
+      visitorLabels[labels[1]],
+      visitorLabels[labels[2]],
+      visitorLabels[labels[3]],
+      visitorLabels[labels[4]],
+      visitorLabels[labels[5]],
+      visitorLabels[labels[6]],
+    ];
+    setVisitorLabels(newLabel);
+    setVisitorCount(visitCount);
+    setFeelingLabels(newLabel);
+    setFeelingCount(happyCount);
+    let percentage = (male.length / prevWeekCustomers.length) * 100;
+    setChartMaleCount(Math.round(percentage));
+    percentage = (female.length / prevWeekCustomers.length) * 100;
+    setChartFemaleCount(Math.round(percentage));
+  };
 
   const countMale = () => {
     const male = customers.filter((e) => e.gender === "male");
@@ -63,18 +135,57 @@ function Dashboard(props) {
   const getFeelings = () => {
     const happy = customers.filter((e) => e.feeling === "happy");
     const happyPercentage = (happy.length / customers.length) * 100;
-    setFeelings(Math.floor(happyPercentage));
+    setFeelings(Math.round(happyPercentage));
   };
 
-  const getCustomers = async () => {
-    const timePeriod = new Date().toISOString();
+  const getPrevWeekCustomers = async () => {
+    let today = new Date();
+    let date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(today.getDate()).padStart(2, "0") - 7}`;
+    const toTime = new Date().toISOString();
+    const fromTime = new Date(date).toISOString();
     let registerRequest;
     try {
       registerRequest = await axios.get(
         `http://${REACT_APP_SERVER_URL}/customers`,
         {
           headers: {
-            time_period: timePeriod,
+            from_time: fromTime,
+            to_time: toTime,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      );
+    } catch ({ response }) {
+      registerRequest = response;
+    }
+    const { data: registerRequestData } = registerRequest;
+    if (registerRequestData.success) {
+      setPrevWeekCustomers(registerRequestData.customers);
+    }
+  };
+
+  const getCustomers = async () => {
+    let today = new Date();
+    let date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(today.getDate()).padStart(2, "0")}`;
+    const toTime = new Date().toISOString();
+    const fromTime = new Date(date).toISOString();
+
+    let registerRequest;
+    try {
+      registerRequest = await axios.get(
+        `http://${REACT_APP_SERVER_URL}/customers`,
+        {
+          headers: {
+            from_time: fromTime,
+            to_time: toTime,
           },
         },
         {
@@ -175,25 +286,12 @@ function Dashboard(props) {
           <Card chart>
             <CardHeader color="success">
               <ChartistGraph
-                className="ct-chart"
-                data={
-                  dailySalesChart(
-                    ["M", "T", "W", "T", "F", "S", "S"],
-                    [12, 17, 7, 17, 23, 18, 38]
-                  ).data
-                }
+                className="ct-chart ct-perfect-fourth"
+                data={dailySalesChart(visitorLabels, visitorCount).data}
                 type="Line"
-                options={
-                  dailySalesChart(
-                    ["M", "T", "W", "T", "F", "S", "S"],
-                    [12, 17, 7, 17, 23, 18, 38]
-                  ).options
-                }
+                options={dailySalesChart(visitorLabels, visitorCount).options}
                 listener={
-                  dailySalesChart(
-                    ["M", "T", "W", "T", "F", "S", "S"],
-                    [12, 17, 7, 17, 23, 18, 38]
-                  ).animation
+                  dailySalesChart(visitorLabels, visitorCount).animation
                 }
               />
             </CardHeader>
@@ -217,31 +315,18 @@ function Dashboard(props) {
           <Card chart>
             <CardHeader color="warning">
               <ChartistGraph
-                className="ct-chart"
-                data={
-                  emailsSubscriptionChart(
-                    ["M", "T", "W", "T", "F", "S", "S"],
-                    [12, 17, 7, 17, 23, 18, 38]
-                  ).data
-                }
+                className="ct-chart ct-perfect-fourth"
+                data={emailsSubscriptionChart(feelingLabels, feelingCount).data}
                 type="Bar"
                 options={
-                  emailsSubscriptionChart(
-                    ["M", "T", "W", "T", "F", "S", "S"],
-                    [12, 17, 7, 17, 23, 18, 38]
-                  ).options
+                  emailsSubscriptionChart(feelingLabels, feelingCount).options
                 }
                 responsiveOptions={
-                  emailsSubscriptionChart(
-                    ["M", "T", "W", "T", "F", "S", "S"],
-                    [12, 17, 7, 17, 23, 18, 38]
-                  ).responsiveOptions
+                  emailsSubscriptionChart(feelingLabels, feelingCount)
+                    .responsiveOptions
                 }
                 listener={
-                  emailsSubscriptionChart(
-                    ["M", "T", "W", "T", "F", "S", "S"],
-                    [12, 17, 7, 17, 23, 18, 38]
-                  ).animation
+                  emailsSubscriptionChart(feelingLabels, feelingCount).animation
                 }
               />
             </CardHeader>
@@ -260,9 +345,12 @@ function Dashboard(props) {
           <Card chart>
             <CardHeader color="info">
               <ChartistGraph
-                className="ct-chart"
+                className="ct-chart ct-perfect-fourth"
                 data={
-                  completedTasksChart(["Male 30%", "Female 70%"], [30, 70]).data
+                  completedTasksChart(
+                    [`Male ${chartMaleCount}%`, `Female ${chartFemaleCount}%`],
+                    [chartMaleCount, chartFemaleCount]
+                  ).data
                 }
                 type="Pie"
               />

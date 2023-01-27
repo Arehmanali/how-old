@@ -4,8 +4,13 @@ const knexConfig = require('../../db/knexfile');
 const knex = Knex(knexConfig[process.env.NODE_ENV]);
 
 // eslint-disable-next-line camelcase
-async function getCustomers(time_period) {
-  const customers = await knex('customers').select().where('created_at', '<', time_period);
+async function getCustomers(fromTime, toTime) {
+  let customers = [];
+  if (fromTime && toTime) {
+    customers = await knex('customers').select().whereBetween('created_at', [fromTime, toTime]);
+  } else {
+    customers = await knex('customers').select();
+  }
   return customers;
 }
 

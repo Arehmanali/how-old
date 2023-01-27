@@ -22,16 +22,11 @@ function Customers(props) {
   }, []);
 
   const getCustomers = async () => {
-    const timePeriod = new Date().toISOString();
     let registerRequest;
     try {
       registerRequest = await axios.get(
         `http://${REACT_APP_SERVER_URL}/customers`,
-        {
-          headers: {
-            time_period: timePeriod,
-          },
-        },
+        {},
         {
           withCredentials: true,
         }

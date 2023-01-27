@@ -25,7 +25,7 @@ const dailySalesChart = (labels, series) => {
       tension: 0,
     }),
     low: 0,
-    high: Math.max.apply(Math, series), // we recommend you to set the high sa the biggest value + something for a better look
+    high: Math.max.apply(Math, series) + 10, // we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {
       top: 0,
       right: 0,
@@ -81,7 +81,7 @@ const emailsSubscriptionChart = (labels, series) => {
       showGrid: false,
     },
     low: 0,
-    high: Math.max.apply(Math, series),
+    high: 110,
     chartPadding: {
       top: 0,
       right: 5,

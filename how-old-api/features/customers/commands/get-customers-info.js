@@ -3,10 +3,10 @@ const { getCustomers } = require('../repository');
 async function getCustomersInfo(req, res) {
   let customers = [];
   // eslint-disable-next-line camelcase
-  const { time_period } = req.headers;
+  const { from_time, to_time } = req.headers;
 
   try {
-    customers = await getCustomers(time_period);
+    customers = await getCustomers(from_time, to_time);
   } catch (error) {
     customers = error;
   }
