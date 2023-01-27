@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -19,7 +19,10 @@ function CustomTable({ ...props }) {
     tableHeaderColor,
     rowsPerPage,
   } = props;
-  const page = tableData && Math.ceil(tableData.length / 10);
+  const [page, setPage] = useState(
+    tableData && Math.ceil(tableData.length / 10)
+  );
+  const [perPageRows, setPerPageRows] = useState(rowsPerPage);
 
   const dateFromISO = (s) => {
     var b = s.split(/\D+/);
@@ -29,6 +32,15 @@ function CustomTable({ ...props }) {
   const timeFromISO = (s) => {
     var b = s.split(/\D+/);
     return `${b[3]}:${b[4]}:${b[5]}`;
+  };
+  const onChangePage = (event, page) => {
+    event.preventDefault();
+    setPage(page);
+  };
+
+  const onChangeRowsPerPage = (event) => {
+    event.preventDefault();
+    setPerPageRows(event.target.value);
   };
 
   return (
@@ -51,44 +63,46 @@ function CustomTable({ ...props }) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.slice(0, rowsPerPage).map((prop, key) => {
-            return (
-              <TableRow key={key}>
-                <TableCell className={classes.tableCell} key={key}>
-                  {prop.id}
-                </TableCell>
-                <TableCell className={classes.tableCell} key={key}>
-                  {prop.gender}
-                </TableCell>
-                <TableCell className={classes.tableCell} key={key}>
-                  {prop.age}
-                </TableCell>
-                <TableCell className={classes.tableCell} key={key}>
-                  {prop.feeling}
-                </TableCell>
-                <TableCell className={classes.tableCell} key={key}>
-                  {dateFromISO(prop.created_at)}
-                </TableCell>
-                <TableCell className={classes.tableCell} key={key}>
-                  {timeFromISO(prop.created_at)}
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          {tableData
+            .slice(page * perPageRows, page * perPageRows + perPageRows)
+            .map((prop, key) => {
+              return (
+                <TableRow key={key}>
+                  <TableCell className={classes.tableCell} key={key}>
+                    {prop.id}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} key={key}>
+                    {prop.gender}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} key={key}>
+                    {prop.age}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} key={key}>
+                    {prop.feeling}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} key={key}>
+                    {dateFromISO(prop.created_at)}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} key={key}>
+                    {timeFromISO(prop.created_at)}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
         </TableBody>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           count={tableData.length}
           rowsPerPage={rowsPerPage}
-          page={0}
+          page={page}
           backIconButtonProps={{
             "aria-label": "Previous Page",
           }}
           nextIconButtonProps={{
             "aria-label": "Next Page",
           }}
-          onChangePage={{}}
-          onChangeRowsPerPage={{}}
+          onChangePage={onChangePage}
+          onChangeRowsPerPage={onChangeRowsPerPage}
         />
       </Table>
     </div>

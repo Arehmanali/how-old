@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import moment from "moment";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -57,6 +58,7 @@ function Dashboard(props) {
   const [feelingCount, setFeelingCount] = useState([]);
   const [chartMaleCount, setChartMaleCount] = useState(0);
   const [chartFemaleCount, setChartFemaleCount] = useState(0);
+  const [updatedAt, setUpdatedAt] = useState(moment().fromNow());
 
   const { classes } = props;
   const { REACT_APP_SERVER_URL } = process.env;
@@ -120,6 +122,7 @@ function Dashboard(props) {
     setChartMaleCount(Math.round(percentage));
     percentage = (female.length / prevWeekCustomers.length) * 100;
     setChartFemaleCount(Math.round(percentage));
+    setUpdatedAt(moment().fromNow());
   };
 
   const countMale = () => {
@@ -302,15 +305,12 @@ function Dashboard(props) {
             <CardBody>
               <h4 className={classes.cardTitle}>Daily Visitors</h4>
               <p className={classes.cardCategory}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                </span>{" "}
-                increase in today visitings.
+                Visitors count of last 7 days
               </p>
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
+                <AccessTime /> updated {updatedAt}
               </div>
             </CardFooter>
           </Card>
@@ -340,7 +340,7 @@ function Dashboard(props) {
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> Last 24 hours
+                <AccessTime /> updated {updatedAt}
               </div>
             </CardFooter>
           </Card>
@@ -365,7 +365,7 @@ function Dashboard(props) {
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> Last 24 hours
+                <AccessTime /> updated {updatedAt}
               </div>
             </CardFooter>
           </Card>
