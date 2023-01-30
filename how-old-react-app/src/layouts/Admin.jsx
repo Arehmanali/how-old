@@ -84,7 +84,6 @@ class Dashboard extends React.Component {
       const ps = new PerfectScrollbar(this.refs.mainPanel);
     }
     window.addEventListener("resize", this.resizeFunction);
-
     if (sessionStorage) {
       if (sessionStorage.success) {
         return (userInfo = sessionStorage.userInfo);

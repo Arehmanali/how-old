@@ -9,7 +9,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import DateRange from "@material-ui/icons/DateRange";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
@@ -99,7 +98,8 @@ function Dashboard(props) {
       visitCount.push(daydata.length);
       labels.push(new Date(date).getDay());
       const happy = daydata.filter((e) => e.feeling === "happy");
-      const happyPercentage = (happy.length / daydata.length) * 100;
+      const happyPercentage =
+        happy.length > 0 ? (happy.length / daydata.length) * 100 : 0;
       happyCount.push(Math.floor(happyPercentage));
     }
 
@@ -294,10 +294,17 @@ function Dashboard(props) {
             <CardHeader color="success">
               <ChartistGraph
                 className="ct-chart ct-perfect-fourth"
-                data={dailySalesChart(visitorLabels, visitorCount).data}
+                data={
+                  visitorCount.length > 0 &&
+                  dailySalesChart(visitorLabels, visitorCount).data
+                }
                 type="Line"
-                options={dailySalesChart(visitorLabels, visitorCount).options}
+                options={
+                  visitorCount.length > 0 &&
+                  dailySalesChart(visitorLabels, visitorCount).options
+                }
                 listener={
+                  visitorCount.length > 0 &&
                   dailySalesChart(visitorLabels, visitorCount).animation
                 }
               />
@@ -320,16 +327,22 @@ function Dashboard(props) {
             <CardHeader color="warning">
               <ChartistGraph
                 className="ct-chart ct-perfect-fourth"
-                data={emailsSubscriptionChart(feelingLabels, feelingCount).data}
+                data={
+                  feelingCount.length > 0 &&
+                  emailsSubscriptionChart(feelingLabels, feelingCount).data
+                }
                 type="Bar"
                 options={
+                  feelingCount.length > 0 &&
                   emailsSubscriptionChart(feelingLabels, feelingCount).options
                 }
                 responsiveOptions={
+                  feelingCount.length > 0 &&
                   emailsSubscriptionChart(feelingLabels, feelingCount)
                     .responsiveOptions
                 }
                 listener={
+                  feelingCount.length > 0 &&
                   emailsSubscriptionChart(feelingLabels, feelingCount).animation
                 }
               />

@@ -17,7 +17,6 @@ async function getUserForLoginData(email, password) {
   if (!isPasswordValid) {
     return null;
   }
-
   return {
     id: user.id,
     username: user.email,

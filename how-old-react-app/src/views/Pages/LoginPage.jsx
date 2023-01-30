@@ -57,7 +57,7 @@ class LoginPage extends React.Component {
           ...formValues,
         },
         {
-          withCredentials: true,
+          withCredentials: false,
         }
       );
     } catch ({ response }) {

@@ -33,7 +33,7 @@ const dailySalesChart = (labels, series) => {
       left: 0,
     },
   };
-  console.log(options);
+  console.log(series);
   // for animation
   const animation = {
     draw: function(data) {
