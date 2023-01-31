@@ -2,7 +2,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Switch, Route, Redirect } from "react-router-dom";
-import axios from "axios";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -89,7 +88,7 @@ class Dashboard extends React.Component {
         return (userInfo = sessionStorage.userInfo);
       }
     }
-    return history.push("/auth/login-page");
+    return history.push("/auth/ -page");
   }
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
