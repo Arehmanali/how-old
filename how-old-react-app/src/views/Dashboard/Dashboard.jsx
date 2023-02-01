@@ -88,9 +88,9 @@ function Dashboard(props) {
     let happyCount = [];
     let labels = [];
     for (let i = 6; i >= 0; i--) {
-      const date = `${today.getFullYear()}-${String(
-        today.getMonth() + 1
-      ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0") - i}`;
+      const date = moment()
+        .subtract(i, "days")
+        .format("YYYY-MM-DD");
       let daydata = prevWeekCustomers.filter(
         (e) => e.created_at.slice(0, 10) === date
       );
