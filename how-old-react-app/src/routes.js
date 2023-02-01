@@ -4,14 +4,16 @@ import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
 import Login from "@material-ui/icons/LockOpen";
 import Register from "@material-ui/icons/GroupAdd";
+import Settings from "@material-ui/icons/Settings";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import UserProfile from "views/UserProfile/UserProfile.jsx";
 import NotificationsPage from "views/Notifications/Notifications.jsx";
 import LoginPage from "views/Pages/LoginPage.jsx";
 import RegisterPage from "views/Pages/RegisterPage.jsx";
-// core components/views for Auth layout
+import SettingsPage from "./views/Settings/Settings";
 import Customers from "./views/Customers/Customers";
+// core components/views for Auth layout
 
 const dashboardRoutes = [
   {
@@ -35,6 +37,14 @@ const dashboardRoutes = [
     name: "Customers",
     icon: "people_outline",
     component: Customers,
+    layout: "/admin",
+    sidebar: true,
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    icon: Settings,
+    component: SettingsPage,
     layout: "/admin",
     sidebar: true,
   },
