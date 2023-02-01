@@ -141,17 +141,10 @@ function Dashboard(props) {
   };
 
   const getPrevWeekCustomers = async () => {
-    let today = new Date();
-    let date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(today.getDate()).padStart(2, "0")}`;
-    let fromTime = new Date(date);
-    fromTime.setDate(today.getDate() - 7);
-    fromTime = fromTime.toISOString();
-    let toTime = new Date(date);
-    toTime.setDate(today.getDate());
-    toTime = toTime.toISOString();
+    let fromTime = moment()
+      .subtract(7, "days")
+      .toISOString();
+    let toTime = moment().toISOString();
     let registerRequest;
     try {
       registerRequest = await axios.get(
@@ -176,15 +169,12 @@ function Dashboard(props) {
   };
 
   const getCustomers = async () => {
-    let today = new Date();
-    let date = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(today.getDate()).padStart(2, "0")}`;
-    const fromTime = new Date(date).toISOString();
-    let toTime = new Date(date);
-    toTime.setDate(today.getDate());
-    toTime = toTime.toISOString();
+    const fromTime = moment()
+      .startOf("day")
+      .toISOString();
+
+    let toTime = moment().toISOString();
+    debugger;
     let registerRequest;
     try {
       registerRequest = await axios.get(
@@ -202,6 +192,8 @@ function Dashboard(props) {
     } catch ({ response }) {
       registerRequest = response;
     }
+    debugger;
+
     const { data: registerRequestData } = registerRequest;
     if (registerRequestData.success) {
       setCustomers(registerRequestData.customers);
