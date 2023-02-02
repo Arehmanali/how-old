@@ -174,7 +174,6 @@ function Dashboard(props) {
       .toISOString();
 
     let toTime = moment().toISOString();
-    debugger;
     let registerRequest;
     try {
       registerRequest = await axios.get(
@@ -192,8 +191,6 @@ function Dashboard(props) {
     } catch ({ response }) {
       registerRequest = response;
     }
-    debugger;
-
     const { data: registerRequestData } = registerRequest;
     if (registerRequestData.success) {
       setCustomers(registerRequestData.customers);
