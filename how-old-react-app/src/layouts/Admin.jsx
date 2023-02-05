@@ -88,7 +88,7 @@ class Dashboard extends React.Component {
         return (userInfo = sessionStorage.userInfo);
       }
     }
-    return history.push("/auth/ -page");
+    return history.push("/auth/login-page");
   }
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {

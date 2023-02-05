@@ -117,6 +117,20 @@ class UserProfile extends React.Component {
     }
     const { data: registerRequestData } = registerRequest;
     if (registerRequestData.success) {
+      const { userInfo } = JSON.parse(localStorage.getItem("sessionStorage"));
+
+      localStorage.setItem(
+        "sessionStorage",
+        JSON.stringify({
+          success: true,
+          userInfo: {
+            ...userInfo,
+            email: registerRequestData.userInfo.email,
+            name: registerRequestData.userInfo.name,
+          },
+        })
+      );
+
       this.setState({
         userName: registerRequestData.userInfo.name,
         userEmail: registerRequestData.userInfo.email,
@@ -242,27 +256,6 @@ class UserProfile extends React.Component {
                 </CardFooter>
               </Card>
             </form>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <Card profile>
-              <CardAvatar profile>
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <img src={avatar} alt="..." />
-                </a>
-              </CardAvatar>
-              <CardBody profile>
-                <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-                <h4 className={classes.cardTitle}>Alec Thompson</h4>
-                <p className={classes.description}>
-                  Don't be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
-                </p>
-                <Button color="primary" round>
-                  Follow
-                </Button>
-              </CardBody>
-            </Card>
           </GridItem>
         </GridContainer>
       </div>
