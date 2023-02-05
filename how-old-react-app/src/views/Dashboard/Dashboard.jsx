@@ -82,8 +82,6 @@ function Dashboard(props) {
   }, [prevWeekCustomers]);
 
   const calculateChartData = async () => {
-    let today = new Date();
-
     let visitCount = [];
     let happyCount = [];
     let labels = [];
@@ -96,7 +94,11 @@ function Dashboard(props) {
       );
 
       visitCount.push(daydata.length);
-      labels.push(new Date(date).getDay());
+      labels.push(
+        moment(date)
+          .format("dddd")
+          .substring(0, 1)
+      );
       const happy = daydata.filter((e) => e.feeling === "happy");
       const happyPercentage =
         happy.length > 0 ? (happy.length / daydata.length) * 100 : 0;
@@ -105,18 +107,10 @@ function Dashboard(props) {
 
     const male = prevWeekCustomers.filter((e) => e.gender === "male");
     const female = prevWeekCustomers.filter((e) => e.gender === "female");
-    const newLabel = [
-      visitorLabels[labels[0]],
-      visitorLabels[labels[1]],
-      visitorLabels[labels[2]],
-      visitorLabels[labels[3]],
-      visitorLabels[labels[4]],
-      visitorLabels[labels[5]],
-      visitorLabels[labels[6]],
-    ];
-    setVisitorLabels(newLabel);
+
+    setVisitorLabels(labels);
     setVisitorCount(visitCount);
-    setFeelingLabels(newLabel);
+    setFeelingLabels(labels);
     setFeelingCount(happyCount);
     let percentage = (male.length / prevWeekCustomers.length) * 100;
     setChartMaleCount(Math.round(percentage));
