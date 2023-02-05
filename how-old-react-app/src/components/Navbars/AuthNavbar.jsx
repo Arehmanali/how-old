@@ -30,7 +30,7 @@ class AuthNavbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
   }
   handleDrawerToggle = () => {
@@ -48,25 +48,15 @@ class AuthNavbar extends React.Component {
   render() {
     const { classes, color, brandText } = this.props;
     const appBarClasses = cx({
-      [" " + classes[color]]: color
+      [" " + classes[color]]: color,
     });
     var list = (
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
-          <NavLink to={"/admin/dashboard"} className={classes.navLink}>
-            <Dashboard className={classes.listItemIcon} />
-            <ListItemText
-              primary={"Dashboard"}
-              disableTypography={true}
-              className={classes.listItemText}
-            />
-          </NavLink>
-        </ListItem>
-        <ListItem className={classes.listItem}>
           <NavLink
             to={"/auth/register-page"}
             className={cx(classes.navLink, {
-              [classes.navLinkActive]: this.activeRoute("/auth/register-page")
+              [classes.navLinkActive]: this.activeRoute("/auth/register-page"),
             })}
           >
             <PersonAdd className={classes.listItemIcon} />
@@ -81,7 +71,7 @@ class AuthNavbar extends React.Component {
           <NavLink
             to={"/auth/login-page"}
             className={cx(classes.navLink, {
-              [classes.navLinkActive]: this.activeRoute("/auth/login-page")
+              [classes.navLinkActive]: this.activeRoute("/auth/login-page"),
             })}
           >
             <Fingerprint className={classes.listItemIcon} />
@@ -130,11 +120,11 @@ class AuthNavbar extends React.Component {
                 anchor={"right"}
                 open={this.state.open}
                 classes={{
-                  paper: classes.drawerPaper
+                  paper: classes.drawerPaper,
                 }}
                 onClose={this.handleDrawerToggle}
                 ModalProps={{
-                  keepMounted: true // Better open performance on mobile.
+                  keepMounted: true, // Better open performance on mobile.
                 }}
               >
                 {list}
@@ -150,7 +140,7 @@ class AuthNavbar extends React.Component {
 AuthNavbar.propTypes = {
   classes: PropTypes.object.isRequired,
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-  brandText: PropTypes.string
+  brandText: PropTypes.string,
 };
 
 export default withStyles(authNavbarStyle)(AuthNavbar);

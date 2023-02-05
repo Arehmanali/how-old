@@ -14,12 +14,9 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
-import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import InputLabel from "@material-ui/core/InputLabel";
-
-import avatar from "assets/img/faces/marc.jpg";
 
 const styles = {
   cardCategoryWhite: {
@@ -227,7 +224,7 @@ class UserProfile extends React.Component {
                         onChange={(e) => this.onChange(e)}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={4}>
+                    <GridItem xs={12} sm={12} md={3}>
                       <InputLabel
                         className={classes.labelRoot}
                         htmlFor={"username"}
