@@ -2,9 +2,10 @@ const { getCameras } = require('../repository');
 
 async function getCamerasInfo(req, res) {
   let cameras = [];
-
+  // eslint-disable-next-line camelcase
+  const { user_id } = req.headers;
   try {
-    cameras = await getCameras();
+    cameras = await getCameras(user_id);
   } catch (error) {
     cameras = error;
   }
@@ -19,7 +20,6 @@ async function getCamerasInfo(req, res) {
 
   return res.send({
     success: false,
-    cameras: [...cameras],
   });
 }
 
