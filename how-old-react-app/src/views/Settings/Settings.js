@@ -196,7 +196,7 @@ class Settings extends React.Component {
           />
 
           <GridItem xs={12} sm={12} md={8}>
-            <form onSubmit={this.updateProfile}>
+            <form onSubmit={this.addNewCamera}>
               <Card>
                 <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Settings</h4>
@@ -214,8 +214,15 @@ class Settings extends React.Component {
                       sm={12}
                       md={12}
                     >
-                      <InputLabel htmlFor={"url"}>Cam URL</InputLabel>
+                      <InputLabel className={classes.labelRoot} htmlFor={"url"}>
+                        Cam URL
+                      </InputLabel>
                       <TextField
+                        classes={{
+                          root: classes.marginTop,
+                          disabled: classes.disabled,
+                          underline: classes.underline,
+                        }}
                         required={true}
                         name={"url"}
                         value={url}
@@ -229,12 +236,12 @@ class Settings extends React.Component {
                         }}
                       />
                       <Button
+                        type="submit"
                         style={{
                           height: "30px",
                           marginTop: "0px",
                           width: "106px",
                         }}
-                        onClick={(e) => this.addNewCamera(e)}
                         color="success"
                       >
                         Add
