@@ -20,7 +20,7 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import InputLabel from "@material-ui/core/InputLabel";
 
-const { REACT_APP_SERVER_URL } = process.env;
+const { REACT_APP_SERVER_URL } = process.env;  // Got the env from config
 
 class Settings extends React.Component {
   constructor(props) {
