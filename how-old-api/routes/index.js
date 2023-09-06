@@ -9,6 +9,7 @@ const profileRoutes = require('../features/profile/routes');
 const customersRoutes = require('../features/customers/routes');
 const camerasRoutes = require('../features/cameras/routes');
 
+// Check for authentication
 function isAuthenticated(req, res, next) {
   if (req.user && req.isAuthenticated()) {
     return next();
