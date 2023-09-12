@@ -37,7 +37,7 @@ const styles = {
   },
 };
 
-const { REACT_APP_SERVER_URL } = process.env;
+const { REACT_APP_SERVER_URL } = process.env; // Server url for APIs
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
