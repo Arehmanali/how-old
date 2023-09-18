@@ -39,6 +39,7 @@ class Settings extends React.Component {
   }
 
   async getCameras() {
+    // User information stored in the local storage
     const { userInfo } = JSON.parse(localStorage.getItem("sessionStorage"));
     const user_id = userInfo.id;
     let registerRequest;
