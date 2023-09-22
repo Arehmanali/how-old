@@ -18,6 +18,7 @@ function isAuthenticated(req, res, next) {
   return res.json({ success: false });
 }
 
+// Route for getting the session
 router.get('/get-session', (req, res) => {
   if (req.user && req.isAuthenticated()) {
     return res.json({ success: true, userInfo: req.user });
