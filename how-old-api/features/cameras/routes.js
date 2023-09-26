@@ -1,6 +1,7 @@
 const { wrap } = require('async-middleware');
 const router = require('express').Router();
 
+// repository files
 const getCamerasInfo = require('./commands/get-camera-info');
 const addNewCamera = require('./commands/add-new-camera');
 const removeCamera = require('./commands/remove-camera');
