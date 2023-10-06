@@ -13,7 +13,7 @@ import CardBody from "components/Card/CardBody.jsx";
 function Customers(props) {
   const { classes } = props;
   const [customers, setCustomers] = useState([]);
-  const { REACT_APP_SERVER_URL } = process.env;
+  const { REACT_APP_SERVER_URL } = process.env; // server url
 
   useEffect(() => {
     new Promise(() => {
