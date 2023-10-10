@@ -1,5 +1,5 @@
 # How Old
-How old is an AI based webapp for guessing the age of the people from their images.
+How old is an AI based webapp for guessing the age of the people from their images
 
 ## Available Scripts
 
